@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset ="ISO-8859-1">
+<title> Add sales</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+ crossorigin="anonymous">
+</head>
+<body>
+<nav th:insert="fragmentlayout :: navBar"/>
+	<div class="container">
+		<form th:action= "@{/saveSales}" th:object ="${salesDisplay}" method="POST">
+		
+			<h1> Add Sales form</h1>
+		
+			<label for="customerList">customer Name</label>
+			<select th:field="${salesDisplay.customerId}"class="form-control mb-4 col-4">
+			<option
+			th:each="customer:${salesDisplay.customerList}"
+			th:value="${customer.id}"
+			th:text="${customer.FName}"></option>
+			</select>
+			<label for="productList">Product Name</label>
+			<select th:field="*{productId}"class="form-control mb-4 col-4">
+			<option
+			th:each="product:${salesDisplay.productList}"
+			th:value="${product.id}"
+			th:text="${product.productName}"></option>
+			</select>
+			<div>
+			<label for="productQuantity">Product Quantity</label>
+			<input type="number" th:field ="*{quantity}" required class="form-control mb-4 col-4">
+			<span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" style="color: red;"></span>
+			</div>
+			
+			
+			<!--<input type="text" th:field ="*{productName}" class="form-control mb-4 col-4">
+			
+			<label for="ProductPrice">Product Price</label>
+			<input type="text" th:field ="*{productPrice}" class="form-control mb-4 col-4">
+			
+			<label for="CompanyName">Company Name</label>
+			<input type="text" th:field ="*{productCompanyName}" class="form-control mb-4 col-4">-->
+			
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

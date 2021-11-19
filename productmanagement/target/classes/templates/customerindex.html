@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset ="ISO-8859-1">
+<title> Customer Index</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+ crossorigin="anonymous">
+</head>
+<body>
+<nav th:insert="fragmentlayout :: navBar"/>
+	<div class="container my-2">
+	
+		<h1> Customer list</h1>
+		<a th:href ="@{/addNewCustomer}" class="btn btn-primary btn-sm mb-3"> Add Customer</a>
+		<table border='1' class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th> Full Name</th>
+					<th> Email </th>
+					<th>Address</th>
+					<th> Mobile Number</th>
+					<th> Date of Birth</th>
+					<th>Action</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer :${listCustomer}">
+					<td th:text="${customer.FName}"></td>
+					<td th:text="${customer.emailAddress}"></td>
+					<td th:text="${customer.address}"></td>
+					<td th:text="${customer.mobileNumber}"></td>
+					<td th:text="${customer.dateOfBirth}"></td>
+					<td> <a th:href="@{/updateCustomer/{id}(id=${customer.id})}"class="btn btn-primary">Update</a>
+					<a th:href="@{/deleteCustomer/{id}(id=${customer.id})}"class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+		</table >
+	</div >
+</body>
+</html >
